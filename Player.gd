@@ -30,8 +30,12 @@ func _physics_process(delta):
 		vel.y += 1
 		facingDir = Vector2(0, 1)
 	if Input.is_action_pressed("move_left"):
-		vel.y -= 1
+		vel.x -= 1
 		facingDir = Vector2(-1, 0)
 	if Input.is_action_pressed("move_right"):
-		vel.y += 1
+		vel.x += 1
 		facingDir = Vector2(1, 0)
+
+	vel = vel.normalized()
+
+	move_and_slide(vel * moveSpeed)
