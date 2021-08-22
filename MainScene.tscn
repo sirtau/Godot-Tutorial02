@@ -9,6 +9,14 @@
 
 [node name="MainScene" type="Node2D"]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource( 6 )]
+margin_left = 2.10486
+margin_top = 0.0852051
+margin_right = 2.10486
+margin_bottom = 0.0852051
+
 [node name="TileMap_Ground" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
 format = 1
@@ -52,12 +60,3 @@ position = Vector2( 265.883, 137.026 )
 
 [node name="Chest3" parent="." instance=ExtResource( 5 )]
 position = Vector2( 491.498, 381.722 )
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="UI" parent="CanvasLayer" instance=ExtResource( 6 )]
-visible = false
-margin_left = 2.10486
-margin_top = 0.0852051
-margin_right = 2.10486
-margin_bottom = 0.0852051

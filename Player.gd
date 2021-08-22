@@ -18,7 +18,13 @@ var facingDir : Vector2 = Vector2()
 
 onready var rayCast = get_node("RayCast2D")
 onready var anim = get_node("AnimatedSprite")
+onready var ui = get_node("/root/MainScene/CanvasLayer/UI")
 
+func _ready():
+	ui.update_level_text(curLevel)
+	ui.update_health_bar(curHp, maxHp)
+	ui.update_xp_bar(curXp, xpToNextLevel)
+	ui.update_gold_text(gold)
 
 func _physics_process(delta):
 	vel = Vector2()
@@ -78,6 +84,7 @@ func play_animation(anim_name):
 
 func give_xp(amount):
 	curXp += amount
+	ui.update_xp_bar(curXp, xpToNextLevel)
 	
 	if curXp >= xpToNextLevel:
 		level_up()
@@ -85,15 +92,20 @@ func give_xp(amount):
 func give_gold(amount):
 	
 	gold += amount
+	ui.update_gold_text(gold)
 
 func level_up():
 	var overflowXp = curXp - xpToNextLevel
 	xpToNextLevel *= xpToLevelIncreaseRate
 	curXp = overflowXp
 	curLevel += 1
+	
+	ui.update_xp_bar(curXp, xpToNextLevel)
+	ui.update_level_text(curLevel)
 
 func take_damage(dmgToTake):
 	curHp -= dmgToTake
+	ui.update_health_bar(curHp, maxHp)
 	
 	if curHp <= 0:
 		die()
