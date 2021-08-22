@@ -17,7 +17,7 @@ var vel : Vector2 = Vector2()
 var facingDir : Vector2 = Vector2()
 
 onready var rayCast = get_node("RayCast2D")
-
+onready var anim = get_node("AnimatedSprite")
 
 
 func _physics_process(delta):
@@ -39,3 +39,28 @@ func _physics_process(delta):
 	vel = vel.normalized()
 
 	move_and_slide(vel * moveSpeed)
+	manage_animations()
+
+func manage_animations ():
+	if vel.x > 0:
+		play_animation("MoveRight")
+	elif vel.x < 0:
+		play_animation("MoveLeft")
+	elif vel.y < 0:
+		play_animation("MoveUp")
+	elif vel.y > 0:
+		play_animation("MoveDown")	
+	elif facingDir.x == 1:
+		play_animation("IdleRight")
+	elif facingDir.x == -1:
+		play_animation("IdleLeft")
+	elif facingDir.y == -1:
+		play_animation("IdleUp")
+	elif facingDir.y == 1:
+		play_animation("IdleDown")
+	
+	
+		
+func play_animation (anim_name):
+	if anim.animation != anim_name:
+		anim.play(anim_name)
