@@ -82,6 +82,10 @@ func give_xp(amount):
 	if curXp >= xpToNextLevel:
 		level_up()
 
+func give_gold(amount):
+	
+	gold += amount
+
 func level_up():
 	var overflowXp = curXp - xpToNextLevel
 	xpToNextLevel *= xpToLevelIncreaseRate
